@@ -256,3 +256,45 @@ console.log(store.getState());
 let fun=addNoteText('Hello!')
 store.dispatch(fun);
 console.log(store.getState());
+
+
+// Write a Counter with Redux
+
+const INCREMENT = 'INCREMENT'; // Define a constant for increment action types
+const DECREMENT = "DECREMENT"; // Define a constant for decrement action types
+
+const counterReducer = ((state=0, action)=>{
+  switch(action.type){
+    case INCREMENT:
+     return state + 1
+    
+    case DECREMENT:
+     return state - 1
+    
+  }
+  return state;
+
+}); // Define the counter reducer which will increment or decrement the state based on the action it receives
+
+const incAction = ()=>({
+    type:INCREMENT
+  
+}); // Define an action creator for incrementing
+
+const decAction =  ()=>({
+  
+    type:DECREMENT
+}); // Define an action creator for decrementing
+
+const store = Redux.createStore(counterReducer); // Define the Redux store here, passing in your reducers
+
+store.subscribe(()=>{
+  console.log(store.getState())
+})
+
+// console.log(store.getState());
+
+store.dispatch(incAction());
+store.dispatch(incAction());
+store.dispatch(decAction());
+store.dispatch(decAction());
